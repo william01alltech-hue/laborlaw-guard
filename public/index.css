@@ -166,7 +166,7 @@ body {
 .main-content {
   flex: 1;
   padding: 16px;
-  padding-bottom: 24px;
+  padding-bottom: 140px; /* 安全間距：確保滾動到底部時內容與按鈕完全不被浮動廣告遮擋 */
 }
 
 .tab-view {
@@ -938,64 +938,142 @@ body {
   line-height: 1.45;
 }
 
-/* ================= 廣告安全間距與底部橫幅 (Google Policy) ================= */
-.ad-safety-divider {
-  height: 48px; /* 強制 48px 安全緩衝間距，杜絕誤觸點擊 */
+/* ================= 底部常駐底座 (App Dock) 與浮動橫幅廣告 ================= */
+.app-dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 60;
+  width: 100%;
+  pointer-events: none; /* 穿透外層空白區域，不阻礙頁面點擊 */
+}
+
+/* 常駐浮動橫幅廣告：精巧膠囊造型、微發光邊框、玻璃擬態 */
+.floating-banner {
+  pointer-events: auto;
+  margin: 0 12px 6px 12px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-top: 1px solid var(--border-glass);
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(11, 17, 32, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 12px rgba(56, 189, 248, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
 }
 
-.ad-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 2px 8px;
-  border-radius: 4px;
+.floating-banner:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 16px rgba(56, 189, 248, 0.15);
 }
 
-.banner-ad-slot {
-  height: 50px;
-  background: rgba(10, 15, 28, 0.95);
-  border-top: 1px solid var(--border-glass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
+.ad-tag {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
 }
 
-.mock-banner-content {
+.banner-body {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 2px;
 }
 
-.mock-sponsor {
-  font-size: 0.62rem;
+.banner-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+}
+
+.banner-body:hover .banner-title {
   color: var(--accent-cyan);
 }
 
-.mock-title {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+.banner-subtitle {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 縮小/還原按鈕 */
+.banner-toggle-btn {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.banner-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+/* 精簡微型膠囊模式 (Mini Mode) - 完全不遮蔽且依然長駐 */
+.floating-banner.minimized {
+  margin: 0 12px 4px auto;
+  width: fit-content;
+  padding: 4px 10px;
+  gap: 6px;
+  background: rgba(11, 17, 32, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.floating-banner.minimized .banner-subtitle {
+  display: none;
+}
+
+.floating-banner.minimized .banner-title {
+  font-size: 0.68rem;
+  max-width: 140px;
+}
+
+.floating-banner.minimized .icon-minimize {
+  display: none;
+}
+
+.floating-banner.minimized .icon-expand {
+  display: block;
 }
 
 /* ================= 底部導航欄 (Bottom Nav) ================= */
 .bottom-nav {
-  position: sticky;
-  bottom: 0;
-  z-index: 50;
+  pointer-events: auto;
   display: flex;
-  border-radius: 16px 16px 0 0;
+  border-radius: 18px 18px 0 0;
   border-bottom: none;
   border-left: none;
   border-right: none;
   padding: 8px 12px;
   padding-bottom: max(8px, env(safe-area-inset-bottom));
+  background: rgba(8, 11, 19, 0.95);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .nav-item {

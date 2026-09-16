@@ -410,39 +410,41 @@
 
     </main>
 
-    <!-- ================= 廣告與導航保留區 ================= -->
-    <!-- Google Policy 安全間距隔離板 (48px) -->
-    <div class="ad-safety-divider">
-      <span class="ad-label">贊助商廣告 AD</span>
-    </div>
-
-    <!-- 底部常駐橫幅廣告欄位 (Banner Ad Slot) -->
-    <div id="banner-ad-container" class="banner-ad-slot">
-      <div class="mock-banner-content">
-        <span class="mock-sponsor">法律事務所 / 工會公益贊助推薦</span>
-        <span class="mock-title">遭遇不當解僱或職災？提供免費勞工法扶諮詢媒合</span>
+    <!-- ================= 底部常駐導航與浮動橫幅廣告底座 ================= -->
+    <footer class="app-dock">
+      <!-- 常駐浮動橫幅廣告欄 (Floating Persistent Banner) -->
+      <div id="floating-banner" class="floating-banner glassmorphism">
+        <div class="ad-tag">贊助</div>
+        <div class="banner-body" id="banner-body-clickable">
+          <div class="banner-title" id="banner-text-title">⚖️ 勞資爭議/職災調解？免費法律扶助媒合諮詢</div>
+          <div class="banner-subtitle" id="banner-text-sub">工會與法扶公益支持 • 勞工 100% 免費體驗</div>
+        </div>
+        <button type="button" id="btn-banner-toggle" class="banner-toggle-btn" aria-label="縮小或展開橫幅廣告" title="切換精簡模式">
+          <svg class="icon-minimize" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <svg class="icon-expand hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
       </div>
-    </div>
 
-    <!-- 底部原生 Tab 導航列 -->
-    <nav class="bottom-nav glassmorphism">
-      <button type="button" class="nav-item active" data-tab="view-salary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-        <span>薪資體檢</span>
-      </button>
-      <button type="button" class="nav-item" data-tab="view-schedule">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        <span>排班月曆</span>
-      </button>
-      <button type="button" class="nav-item" data-tab="view-ai">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <span>AI 智囊</span>
-      </button>
-      <button type="button" class="nav-item" data-tab="view-report">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-        <span>存證報告</span>
-      </button>
-    </nav>
+      <!-- 底部原生 Tab 導航列 -->
+      <nav class="bottom-nav glassmorphism">
+        <button type="button" class="nav-item active" data-tab="view-salary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          <span>薪資體檢</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="view-schedule">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>排班月曆</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="view-ai">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>AI 智囊</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="view-report">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>存證報告</span>
+        </button>
+      </nav>
+    </footer>
 
   </div>
 

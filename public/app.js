@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCalendar();
   initAIChat();
   initReportActions();
+  initFloatingBanner();
   console.log('🚀 勞工守護神 PWA 系統已啟動完成！');
 });
 
@@ -703,4 +704,67 @@ function exportReportAsText(report) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+// ================= 9. 常駐浮動橫幅廣告 (Floating Persistent Banner) =================
+function initFloatingBanner() {
+  const banner = document.getElementById('floating-banner');
+  const btnToggle = document.getElementById('btn-banner-toggle');
+  const bannerBody = document.getElementById('banner-body-clickable');
+  const titleEl = document.getElementById('banner-text-title');
+  const subEl = document.getElementById('banner-text-sub');
+
+  if (!banner || !btnToggle) return;
+
+  // 1. 縮小 / 展開切換（尊重使用者，隨時可切換成極細小膠囊）
+  btnToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isMinimized = banner.classList.toggle('minimized');
+    btnToggle.title = isMinimized ? '展開橫幅廣告' : '切換精簡模式';
+  });
+
+  // 2. 點擊橫幅彈出公益贊助與法扶媒合說明
+  if (bannerBody) {
+    bannerBody.addEventListener('click', () => {
+      alert('🏛️【勞工守護神 - 公益贊助倡議】\n\n本系統堅持全體勞工「100% 免費使用」！\n由勞工權益律師團隊與工會組織共同維護，提供免費調解存證試算與令函查詢。\n\n若您遇到惡意解僱、重大欠薪或職業災害，建議一鍵產出「存證報告」前往各縣市政府勞工局申請勞資爭議調解！');
+    });
+  }
+
+  // 3. 柔和輪播提示（每 8 秒平滑切換，不打擾操作）
+  const messages = [
+    {
+      title: '⚖️ 勞資爭議/職災調解？免費法律扶助媒合諮詢',
+      sub: '工會與法扶公益支持 • 勞工 100% 免費體驗'
+    },
+    {
+      title: '🛡️ 薪資短發或未足額加給？一鍵產出調解存證清冊',
+      sub: '依勞基法第24條與第38條嚴謹試算 • 具法規佐證力'
+    },
+    {
+      title: '📱 主管下班傳 LINE 算加班！立即諮詢 AI 智囊',
+      sub: '依勞動部 1030130894 號官方有效令函深度拆解'
+    }
+  ];
+
+  let currentMsgIdx = 0;
+  setInterval(() => {
+    if (banner.classList.contains('minimized')) return; // 縮小時不切換
+    currentMsgIdx = (currentMsgIdx + 1) % messages.length;
+    
+    // 淡出過渡
+    if (titleEl) titleEl.style.opacity = '0';
+    if (subEl) subEl.style.opacity = '0';
+
+    setTimeout(() => {
+      if (titleEl) {
+        titleEl.textContent = messages[currentMsgIdx].title;
+        titleEl.style.opacity = '1';
+      }
+      if (subEl) {
+        subEl.textContent = messages[currentMsgIdx].sub;
+        subEl.style.opacity = '1';
+      }
+    }, 250);
+  }, 8000);
+}
+
 
