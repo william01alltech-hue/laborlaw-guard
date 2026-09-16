@@ -112,6 +112,8 @@ const server = http.createServer(async (req, res) => {
   let filePath = reqPath;
   if (filePath === '/' || filePath === '') {
     filePath = '/public/index.html';
+  } else if (filePath === '/privacy') {
+    filePath = '/public/privacy.html';
   } else if (!filePath.startsWith('/public') && !filePath.startsWith('/constants') && !filePath.startsWith('/engine') && !filePath.startsWith('/data')) {
     filePath = '/public' + filePath;
   }

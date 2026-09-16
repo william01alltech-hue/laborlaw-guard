@@ -3,10 +3,11 @@
  * 快取策略：靜態 UI 資源極速快取，業務與廣告走強制網路
  */
 
-const CACHE_NAME = 'labor-guard-v2';
+const CACHE_NAME = 'labor-guard-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
+  '/privacy.html',
   '/index.css',
   '/app.js',
   '/engine/calculator.js',
