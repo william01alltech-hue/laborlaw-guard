@@ -1,0 +1,18 @@
+{
+  "name": "勞工守護神 - 勞基法智慧體檢與調解存證系統",
+  "short_name": "勞工守護神",
+  "description": "全台首創 100% 免費勞基法違法體檢系統，精算少給加班費、高薪低報、勞退內扣，並一鍵產出正式調解存證清冊。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080B13",
+  "theme_color": "#0B0F19",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

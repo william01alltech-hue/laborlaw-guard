@@ -1,0 +1,265 @@
+{
+  "version": "2026.1.0",
+  "effective_date": "2026-01-01",
+  "statutory_minimums": {
+    "monthly_wage": 28590,
+    "hourly_wage": 190,
+    "statutory_monthly_work_hours_divisor": 240
+  },
+  "labor_insurance": {
+    "ordinary_rate": 0.11,
+    "employment_rate": 0.01,
+    "total_rate": 0.12,
+    "sharing_ratios": {
+      "worker": 0.20,
+      "employer": 0.70,
+      "government": 0.10
+    },
+    "maximum_insured_salary": 45800,
+    "tier_table": [
+      { "level": 1, "salary_min": 0, "salary_max": 28590, "insured_salary": 28590 },
+      { "level": 2, "salary_min": 28591, "salary_max": 28800, "insured_salary": 28800 },
+      { "level": 3, "salary_min": 28801, "salary_max": 30300, "insured_salary": 30300 },
+      { "level": 4, "salary_min": 30301, "salary_max": 31800, "insured_salary": 31800 },
+      { "level": 5, "salary_min": 31801, "salary_max": 33300, "insured_salary": 33300 },
+      { "level": 6, "salary_min": 33301, "salary_max": 34800, "insured_salary": 34800 },
+      { "level": 7, "salary_min": 34801, "salary_max": 36300, "insured_salary": 36300 },
+      { "level": 8, "salary_min": 36301, "salary_max": 38200, "insured_salary": 38200 },
+      { "level": 9, "salary_min": 38201, "salary_max": 40100, "insured_salary": 40100 },
+      { "level": 10, "salary_min": 40101, "salary_max": 42000, "insured_salary": 42000 },
+      { "level": 11, "salary_min": 42001, "salary_max": 43900, "insured_salary": 43900 },
+      { "level": 12, "salary_min": 43901, "salary_max": 9999999, "insured_salary": 45800 }
+    ]
+  },
+  "occupational_accident_insurance": {
+    "name": "勞工職業災害保險",
+    "maximum_insured_salary": 72800,
+    "sharing_ratios": {
+      "worker": 0.0,
+      "employer": 1.0,
+      "government": 0.0
+    },
+    "average_rate": 0.002,
+    "tier_table": [
+      { "salary_min": 0, "salary_max": 28590, "insured_salary": 28590 },
+      { "salary_min": 28591, "salary_max": 28800, "insured_salary": 28800 },
+      { "salary_min": 28801, "salary_max": 30300, "insured_salary": 30300 },
+      { "salary_min": 30301, "salary_max": 31800, "insured_salary": 31800 },
+      { "salary_min": 31801, "salary_max": 33300, "insured_salary": 33300 },
+      { "salary_min": 33301, "salary_max": 34800, "insured_salary": 34800 },
+      { "salary_min": 34801, "salary_max": 36300, "insured_salary": 36300 },
+      { "salary_min": 36301, "salary_max": 38200, "insured_salary": 38200 },
+      { "salary_min": 38201, "salary_max": 40100, "insured_salary": 40100 },
+      { "salary_min": 40101, "salary_max": 42000, "insured_salary": 42000 },
+      { "salary_min": 42001, "salary_max": 43900, "insured_salary": 43900 },
+      { "salary_min": 43901, "salary_max": 45800, "insured_salary": 45800 },
+      { "salary_min": 45801, "salary_max": 48200, "insured_salary": 48200 },
+      { "salary_min": 48201, "salary_max": 50600, "insured_salary": 50600 },
+      { "salary_min": 50601, "salary_max": 53000, "insured_salary": 53000 },
+      { "salary_min": 53001, "salary_max": 55400, "insured_salary": 55400 },
+      { "salary_min": 55401, "salary_max": 57800, "insured_salary": 57800 },
+      { "salary_min": 57801, "salary_max": 60600, "insured_salary": 60600 },
+      { "salary_min": 60601, "salary_max": 63800, "insured_salary": 63800 },
+      { "salary_min": 63801, "salary_max": 66800, "insured_salary": 66800 },
+      { "salary_min": 66801, "salary_max": 69800, "insured_salary": 69800 },
+      { "salary_min": 69801, "salary_max": 9999999, "insured_salary": 72800 }
+    ]
+  },
+  "health_insurance": {
+    "rate": 0.0517,
+    "sharing_ratios": {
+      "worker": 0.30,
+      "employer": 0.60,
+      "government": 0.10
+    },
+    "max_dependents_charged": 3,
+    "maximum_insured_salary": 219500,
+    "tier_table": [
+      { "level": 1, "salary_min": 0, "salary_max": 28590, "insured_salary": 28590 },
+      { "level": 2, "salary_min": 28591, "salary_max": 28800, "insured_salary": 28800 },
+      { "level": 3, "salary_min": 28801, "salary_max": 30300, "insured_salary": 30300 },
+      { "level": 4, "salary_min": 30301, "salary_max": 31800, "insured_salary": 31800 },
+      { "level": 5, "salary_min": 31801, "salary_max": 33300, "insured_salary": 33300 },
+      { "level": 6, "salary_min": 33301, "salary_max": 34800, "insured_salary": 34800 },
+      { "level": 7, "salary_min": 34801, "salary_max": 36300, "insured_salary": 36300 },
+      { "level": 8, "salary_min": 36301, "salary_max": 38200, "insured_salary": 38200 },
+      { "level": 9, "salary_min": 38201, "salary_max": 40100, "insured_salary": 40100 },
+      { "level": 10, "salary_min": 40101, "salary_max": 42000, "insured_salary": 42000 },
+      { "level": 11, "salary_min": 42001, "salary_max": 43900, "insured_salary": 43900 },
+      { "level": 12, "salary_min": 43901, "salary_max": 45800, "insured_salary": 45800 },
+      { "level": 13, "salary_min": 45801, "salary_max": 48200, "insured_salary": 48200 },
+      { "level": 14, "salary_min": 48201, "salary_max": 50600, "insured_salary": 50600 },
+      { "level": 15, "salary_min": 50601, "salary_max": 53000, "insured_salary": 53000 },
+      { "level": 16, "salary_min": 53001, "salary_max": 55400, "insured_salary": 55400 },
+      { "level": 17, "salary_min": 55401, "salary_max": 57800, "insured_salary": 57800 },
+      { "level": 18, "salary_min": 57801, "salary_max": 60600, "insured_salary": 60600 },
+      { "level": 19, "salary_min": 60601, "salary_max": 63800, "insured_salary": 63800 },
+      { "level": 20, "salary_min": 63801, "salary_max": 66800, "insured_salary": 66800 },
+      { "level": 21, "salary_min": 66801, "salary_max": 69800, "insured_salary": 69800 },
+      { "level": 22, "salary_min": 69801, "salary_max": 72800, "insured_salary": 72800 },
+      { "level": 23, "salary_min": 72801, "salary_max": 76500, "insured_salary": 76500 },
+      { "level": 24, "salary_min": 76501, "salary_max": 80200, "insured_salary": 80200 },
+      { "level": 25, "salary_min": 80201, "salary_max": 83900, "insured_salary": 83900 },
+      { "level": 26, "salary_min": 83901, "salary_max": 87600, "insured_salary": 87600 },
+      { "level": 27, "salary_min": 87601, "salary_max": 92100, "insured_salary": 92100 },
+      { "level": 28, "salary_min": 92101, "salary_max": 96600, "insured_salary": 96600 },
+      { "level": 29, "salary_min": 96601, "salary_max": 101100, "insured_salary": 101100 },
+      { "level": 30, "salary_min": 101101, "salary_max": 105600, "insured_salary": 105600 },
+      { "level": 31, "salary_min": 105601, "salary_max": 110100, "insured_salary": 110100 },
+      { "level": 32, "salary_min": 110101, "salary_max": 115500, "insured_salary": 115500 },
+      { "level": 33, "salary_min": 115501, "salary_max": 120900, "insured_salary": 120900 },
+      { "level": 34, "salary_min": 120901, "salary_max": 126300, "insured_salary": 126300 },
+      { "level": 35, "salary_min": 126301, "salary_max": 131700, "insured_salary": 131700 },
+      { "level": 36, "salary_min": 131701, "salary_max": 137100, "insured_salary": 137100 },
+      { "level": 37, "salary_min": 137101, "salary_max": 142500, "insured_salary": 142500 },
+      { "level": 38, "salary_min": 142501, "salary_max": 147900, "insured_salary": 147900 },
+      { "level": 39, "salary_min": 147901, "salary_max": 150000, "insured_salary": 150000 },
+      { "level": 40, "salary_min": 150001, "salary_max": 156800, "insured_salary": 156800 },
+      { "level": 41, "salary_min": 156801, "salary_max": 163600, "insured_salary": 163600 },
+      { "level": 42, "salary_min": 163601, "salary_max": 170400, "insured_salary": 170400 },
+      { "level": 43, "salary_min": 170401, "salary_max": 177200, "insured_salary": 177200 },
+      { "level": 44, "salary_min": 177201, "salary_max": 184000, "insured_salary": 184000 },
+      { "level": 45, "salary_min": 184001, "salary_max": 191200, "insured_salary": 191200 },
+      { "level": 46, "salary_min": 191201, "salary_max": 198400, "insured_salary": 198400 },
+      { "level": 47, "salary_min": 198401, "salary_max": 205600, "insured_salary": 205600 },
+      { "level": 48, "salary_min": 205601, "salary_max": 212800, "insured_salary": 212800 },
+      { "level": 49, "salary_min": 212801, "salary_max": 9999999, "insured_salary": 219500 }
+    ]
+  },
+  "labor_pension": {
+    "employer_statutory_minimum_rate": 0.06,
+    "worker_voluntary_maximum_rate": 0.06,
+    "maximum_monthly_wage": 150000,
+    "tier_table": [
+      { "level": 1, "salary_min": 0, "salary_max": 1500, "insured_salary": 1500 },
+      { "level": 2, "salary_min": 1501, "salary_max": 3000, "insured_salary": 3000 },
+      { "level": 3, "salary_min": 3001, "salary_max": 4500, "insured_salary": 4500 },
+      { "level": 4, "salary_min": 4501, "salary_max": 6000, "insured_salary": 6000 },
+      { "level": 5, "salary_min": 6001, "salary_max": 7500, "insured_salary": 7500 },
+      { "level": 6, "salary_min": 7501, "salary_max": 8700, "insured_salary": 8700 },
+      { "level": 7, "salary_min": 8701, "salary_max": 9900, "insured_salary": 9900 },
+      { "level": 8, "salary_min": 9901, "salary_max": 11100, "insured_salary": 11100 },
+      { "level": 9, "salary_min": 11101, "salary_max": 12540, "insured_salary": 12540 },
+      { "level": 10, "salary_min": 12541, "salary_max": 13500, "insured_salary": 13500 },
+      { "level": 11, "salary_min": 13501, "salary_max": 15840, "insured_salary": 15840 },
+      { "level": 12, "salary_min": 15841, "salary_max": 16500, "insured_salary": 16500 },
+      { "level": 13, "salary_min": 16501, "salary_max": 17280, "insured_salary": 17280 },
+      { "level": 14, "salary_min": 17281, "salary_max": 17880, "insured_salary": 17880 },
+      { "level": 15, "salary_min": 17881, "salary_max": 19047, "insured_salary": 19047 },
+      { "level": 16, "salary_min": 19048, "salary_max": 20008, "insured_salary": 20008 },
+      { "level": 17, "salary_min": 20009, "salary_max": 21009, "insured_salary": 21009 },
+      { "level": 18, "salary_min": 21010, "salary_max": 22000, "insured_salary": 22000 },
+      { "level": 19, "salary_min": 22001, "salary_max": 23100, "insured_salary": 23100 },
+      { "level": 20, "salary_min": 23101, "salary_max": 24000, "insured_salary": 24000 },
+      { "level": 21, "salary_min": 24001, "salary_max": 25200, "insured_salary": 25200 },
+      { "level": 22, "salary_min": 25201, "salary_max": 26400, "insured_salary": 26400 },
+      { "level": 23, "salary_min": 26401, "salary_max": 27600, "insured_salary": 27600 },
+      { "level": 24, "salary_min": 27601, "salary_max": 28590, "insured_salary": 28590 },
+      { "level": 25, "salary_min": 28591, "salary_max": 28800, "insured_salary": 28800 },
+      { "level": 26, "salary_min": 28801, "salary_max": 30300, "insured_salary": 30300 },
+      { "level": 27, "salary_min": 30301, "salary_max": 31800, "insured_salary": 31800 },
+      { "level": 28, "salary_min": 31801, "salary_max": 33300, "insured_salary": 33300 },
+      { "level": 29, "salary_min": 33301, "salary_max": 34800, "insured_salary": 34800 },
+      { "level": 30, "salary_min": 34801, "salary_max": 36300, "insured_salary": 36300 },
+      { "level": 31, "salary_min": 36301, "salary_max": 38200, "insured_salary": 38200 },
+      { "level": 32, "salary_min": 38201, "salary_max": 40100, "insured_salary": 40100 },
+      { "level": 33, "salary_min": 40101, "salary_max": 42000, "insured_salary": 42000 },
+      { "level": 34, "salary_min": 42001, "salary_max": 43900, "insured_salary": 43900 },
+      { "level": 35, "salary_min": 43901, "salary_max": 45800, "insured_salary": 45800 },
+      { "level": 36, "salary_min": 45801, "salary_max": 48200, "insured_salary": 48200 },
+      { "level": 37, "salary_min": 48201, "salary_max": 50600, "insured_salary": 50600 },
+      { "level": 38, "salary_min": 50601, "salary_max": 53000, "insured_salary": 53000 },
+      { "level": 39, "salary_min": 53001, "salary_max": 55400, "insured_salary": 55400 },
+      { "level": 40, "salary_min": 55401, "salary_max": 57800, "insured_salary": 57800 },
+      { "level": 41, "salary_min": 57801, "salary_max": 60600, "insured_salary": 60600 },
+      { "level": 42, "salary_min": 60601, "salary_max": 63800, "insured_salary": 63800 },
+      { "level": 43, "salary_min": 63801, "salary_max": 66800, "insured_salary": 66800 },
+      { "level": 44, "salary_min": 66801, "salary_max": 69800, "insured_salary": 69800 },
+      { "level": 45, "salary_min": 69801, "salary_max": 72800, "insured_salary": 72800 },
+      { "level": 46, "salary_min": 72801, "salary_max": 76500, "insured_salary": 76500 },
+      { "level": 47, "salary_min": 76501, "salary_max": 80200, "insured_salary": 80200 },
+      { "level": 48, "salary_min": 80201, "salary_max": 83900, "insured_salary": 83900 },
+      { "level": 49, "salary_min": 83901, "salary_max": 87600, "insured_salary": 87600 },
+      { "level": 50, "salary_min": 87601, "salary_max": 92100, "insured_salary": 92100 },
+      { "level": 51, "salary_min": 92101, "salary_max": 96600, "insured_salary": 96600 },
+      { "level": 52, "salary_min": 96601, "salary_max": 101100, "insured_salary": 101100 },
+      { "level": 53, "salary_min": 101101, "salary_max": 105600, "insured_salary": 105600 },
+      { "level": 54, "salary_min": 105601, "salary_max": 110100, "insured_salary": 110100 },
+      { "level": 55, "salary_min": 110101, "salary_max": 115500, "insured_salary": 115500 },
+      { "level": 56, "salary_min": 115501, "salary_max": 120900, "insured_salary": 120900 },
+      { "level": 57, "salary_min": 120901, "salary_max": 126300, "insured_salary": 126300 },
+      { "level": 58, "salary_min": 126301, "salary_max": 131700, "insured_salary": 131700 },
+      { "level": 59, "salary_min": 131701, "salary_max": 137100, "insured_salary": 137100 },
+      { "level": 60, "salary_min": 137101, "salary_max": 142500, "insured_salary": 142500 },
+      { "level": 61, "salary_min": 142501, "salary_max": 147900, "insured_salary": 147900 },
+      { "level": 62, "salary_min": 147901, "salary_max": 9999999, "insured_salary": 150000 }
+    ]
+  },
+  "overtime_rules": {
+    "monthly_worker": {
+      "note": "月薪制平日每小時工資額 R = (本薪+固定經常性津貼)/240。因月薪已內含當日本薪，休息日出勤僅計算額外加給。",
+      "weekday": {
+        "tier1_hours_limit": 2,
+        "tier1_rate_multiplier": "4/3",
+        "tier2_rate_multiplier": "5/3"
+      },
+      "rest_day": {
+        "tier1_hours_limit": 2,
+        "tier1_rate_multiplier": "4/3",
+        "tier2_hours_limit": 8,
+        "tier2_rate_multiplier": "5/3",
+        "tier3_rate_multiplier": "8/3"
+      },
+      "national_holiday": {
+        "base_8h_pay": "8 * R",
+        "overtime_tier1_multiplier": "4/3",
+        "overtime_tier2_multiplier": "5/3"
+      },
+      "regular_leave": {
+        "is_violation_unless_disaster": true,
+        "penalty": "加發一日工資並於事後給予補休一日"
+      }
+    },
+    "hourly_worker": {
+      "note": "時薪制基本時薪中不包含例假與休息日本薪（內政部74年台內勞字第328433號函）。休息日出勤需依法給付全額本薪與加成。",
+      "weekday": {
+        "tier1_rate_multiplier": "4/3",
+        "tier2_rate_multiplier": "5/3"
+      },
+      "rest_day": {
+        "tier1_rate_multiplier": "4/3",
+        "tier2_rate_multiplier": "5/3",
+        "tier3_rate_multiplier": "8/3",
+        "requires_base_holiday_wage": true
+      }
+    }
+  },
+  "special_leave_rules": {
+    "legal_basis": "勞動基準法第38條",
+    "tenure_tiers": [
+      { "min_months": 6, "max_months": 11, "days": 3 },
+      { "min_months": 12, "max_months": 23, "days": 7 },
+      { "min_months": 24, "max_months": 35, "days": 10 },
+      { "min_months": 36, "max_months": 47, "days": 14 },
+      { "min_months": 48, "max_months": 59, "days": 14 },
+      { "min_months": 60, "max_months": 119, "days": 15 },
+      { "min_months": 120, "max_months": 9999, "base_days": 15, "add_day_per_year": 1, "max_days": 30 }
+    ]
+  },
+  "flexible_working_hours": {
+    "two_week": {
+      "max_daily_normal_hours": 10,
+      "rule": "每7日中至少有1日例假，每2週內之例假及休息日至少有4日"
+    },
+    "four_week": {
+      "applicable_industries": ["餐飲業", "零售業", "保全業", "加油站業", "理髮美髮業", "醫療保健服務業", "觀光旅館業"],
+      "max_daily_normal_hours": 10,
+      "max_consecutive_work_days_allowed": 10,
+      "rule": "每2週內至少有2日之例假，4週內之例假及休息日至少有8日"
+    },
+    "eight_week": {
+      "applicable_industries": ["製造業", "營造業", "運輸業", "電信業"],
+      "rule": "每7日中至少有1日例假，8週內之例假及休息日至少有16日"
+    }
+  }
+}

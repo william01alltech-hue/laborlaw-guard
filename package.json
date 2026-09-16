@@ -1,0 +1,23 @@
+{
+  "name": "laborlaw-guard",
+  "version": "1.0.0",
+  "description": "勞工守護神 - 勞基法智慧體檢與調解存證系統 (PWA + Qwen 3.8-27B on Groq)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test_constants.js && node tests/test_calculator.js && node tests/test_scheduler.js && node tests/test_pwa_server.js",
+    "test:constants": "node tests/test_constants.js",
+    "test:calculator": "node tests/test_calculator.js",
+    "test:scheduler": "node tests/test_scheduler.js",
+    "test:server": "node tests/test_pwa_server.js"
+  },
+  "keywords": [
+    "taiwan-labor-law",
+    "pwa",
+    "qwen",
+    "rag",
+    "labor-rights"
+  ],
+  "author": "Labor Law Guard Team",
+  "license": "MIT"
+}

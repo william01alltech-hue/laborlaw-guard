@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0F19">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="勞工守護神">
+  <title>勞工守護神 - 勞基法智慧體檢與調解存證系統</title>
+  <meta name="description" content="全台首創 100% 免費勞基法違法體檢系統，精算少給加班費、高薪低報、勞退內扣，並一鍵產出正式調解存證清冊。">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- 必須在線守衛遮罩 (Always-Online Guard) -->
+  <div id="offline-guard-overlay" class="offline-overlay hidden">
+    <div class="offline-card glassmorphism">
+      <div class="offline-icon-pulse">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+          <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+          <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+          <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+          <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+          <line x1="12" y1="20" x2="12.01" y2="20"></line>
+        </svg>
+      </div>
+      <h2>網路連線已中斷</h2>
+      <p class="offline-desc">
+        本工具由贊助廣告支持，<strong>全體勞工 100% 免費使用</strong>。<br>
+        為維持法規資料庫即時核驗與 AI 解釋令運算，<strong>系統必須在連網狀態下使用</strong>。
+      </p>
+      <div class="offline-tips">
+        <span class="lock-tag">🔒 已輸入資料安全暫存於手機本機，連線後自動恢復</span>
+      </div>
+      <button id="btn-reconnect" class="btn btn-primary btn-glow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        重新檢查連線狀態
+      </button>
+    </div>
+  </div>
+
+  <!-- 主應用容器 -->
+  <div class="app-container">
+
+    <!-- 頂部狀態列 Header -->
+    <header class="app-header glassmorphism">
+      <div class="brand-area">
+        <div class="brand-logo-glow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">勞工守護神</h1>
+          <span class="brand-badge">2026 官方最新法規庫</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div id="network-indicator" class="network-badge online">
+          <span class="dot"></span>
+          <span class="label">在線保護中</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 核心內容滾動區 (Main Content) -->
+    <main class="main-content">
+
+      <!-- ================= 視圖 1：薪資體檢精靈 ================= -->
+      <section id="view-salary" class="tab-view active">
+        <div class="view-intro">
+          <div class="pill-tag">模組一：工資與社保體檢</div>
+          <h2>拆解薪資單，抓出違法扣項</h2>
+          <p>輸入您薪資單上的各項金額，系統將自動精算合法分母、檢查高薪低報與勞退 6% 內扣。</p>
+        </div>
+
+        <form id="form-salary" class="interactive-form">
+          <!-- 聘僱型態切換 -->
+          <div class="form-group-card glassmorphism">
+            <label class="section-label">聘僱薪資型態</label>
+            <div class="segmented-control">
+              <input type="radio" name="employment_type" id="type-monthly" value="monthly" checked>
+              <label for="type-monthly" class="segment-btn">月薪制勞工</label>
+              <input type="radio" name="employment_type" id="type-hourly" value="hourly">
+              <label for="type-hourly" class="segment-btn">時薪制 (工讀/兼職)</label>
+            </div>
+            <div class="form-hint">月薪制基本工資為 28,590 元，時薪制基本時薪為 190 元。</div>
+            <div class="input-grid" style="margin-top: 12px;">
+              <div class="input-field">
+                <label for="input-hire-date">勞工受僱到職日期</label>
+                <input type="date" id="input-hire-date" value="2023-01-01" required>
+                <span class="sub-hint">系統將依此精算法定年資、特休天數折現與資遣費</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 約定工資明細拆解 -->
+          <div class="form-group-card glassmorphism">
+            <div class="card-header-row">
+              <label class="section-label">工資加給拆解 (經常性給與)</label>
+              <span class="badge-tip">依法全數計入分母</span>
+            </div>
+            
+            <div class="input-grid">
+              <div class="input-field">
+                <label for="input-base-salary" id="lbl-base-salary">約定本薪 / 底薪 (元)</label>
+                <input type="number" id="input-base-salary" placeholder="例：26000" value="28590" required>
+              </div>
+              <div class="input-field">
+                <label for="input-attendance-bonus">全勤獎金 (元)</label>
+                <input type="number" id="input-attendance-bonus" placeholder="例：3000" value="0">
+              </div>
+              <div class="input-field">
+                <label for="input-meal-allowance">伙食津貼 (元)</label>
+                <input type="number" id="input-meal-allowance" placeholder="例：3000" value="0">
+              </div>
+              <div class="input-field">
+                <label for="input-duty-allowance">職務加給 / 績效津貼 (元)</label>
+                <input type="number" id="input-duty-allowance" placeholder="例：3000" value="0">
+              </div>
+            </div>
+
+            <!-- 即時試算看板 -->
+            <div class="wage-preview-box">
+              <div class="wage-preview-item">
+                <span class="lbl" id="lbl-preview-total">經常性工資總額</span>
+                <span id="preview-total-wage" class="val text-glow">$ 28,590</span>
+              </div>
+              <div class="wage-preview-item">
+                <span class="lbl">平日每小時工資母數 (R)</span>
+                <span id="preview-hourly-rate" class="val">$ 119.1 / hr</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 社保與扣項檢查 -->
+          <div class="form-group-card glassmorphism">
+            <label class="section-label">勞健保扣繳與高危險紅線</label>
+            <div class="input-grid">
+              <div class="input-field">
+                <label for="input-reported-labor">薪資單勞保申報投保級距 (元)</label>
+                <input type="number" id="input-reported-labor" placeholder="若不知請填實領薪資" value="28590">
+              </div>
+              <div class="input-field">
+                <label for="input-dependents-count">健保依附加保眷屬人數 (口)</label>
+                <input type="number" id="input-dependents-count" min="0" max="10" value="0">
+                <span class="sub-hint">依法超過 3 口免收健保費</span>
+              </div>
+            </div>
+
+            <!-- 違法內扣紅線勾選 -->
+            <div class="danger-check-group">
+              <div class="danger-check-item">
+                <input type="checkbox" id="check-pension-inward" class="custom-checkbox">
+                <label for="check-pension-inward">
+                  <span class="chk-title">🔴 薪資單有一筆「雇主提繳 6% 退休金」被扣除</span>
+                  <span class="chk-desc">法律規定 6% 應由雇主負擔，自工資扣除屬重大違法。</span>
+                </label>
+              </div>
+              <div id="box-pension-amount" class="input-field inward-amount-box hidden">
+                <label for="input-pension-deducted">被內扣的退休金金額 (元)</label>
+                <input type="number" id="input-pension-deducted" placeholder="例：2100" value="0">
+              </div>
+            </div>
+          </div>
+
+          <div class="action-btn-area">
+            <button type="button" id="btn-to-schedule" class="btn btn-primary btn-block">
+              下一步：排班與加班記錄 ➜
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ================= 視圖 2：排班打卡月曆 ================= -->
+      <section id="view-schedule" class="tab-view">
+        <div class="view-intro">
+          <div class="pill-tag">模組二：工時紅線與排班</div>
+          <h2>互動式排班與加班記錄</h2>
+          <p>點選日期登記出勤時間，系統自動比對連七違規、單日超 12 小時與超時加班上限。</p>
+        </div>
+
+        <div class="form-group-card glassmorphism">
+          <div class="card-header-row">
+            <label class="section-label">工時體系選擇</label>
+            <select id="select-flexible-system" class="custom-select">
+              <option value="standard">一般週休二日 (每7日1例1休)</option>
+              <option value="four_week">四週變形工時 (餐飲/零售/保全業)</option>
+              <option value="two_week">二週變形工時</option>
+              <option value="eight_week">八週變形工時</option>
+            </select>
+          </div>
+
+          <!-- 月曆容器 -->
+          <div class="calendar-wrapper">
+            <div class="calendar-month-header">
+              <button type="button" id="cal-prev" class="cal-nav-btn">‹</button>
+              <span id="cal-month-title" class="cal-title">2026 年 3 月</span>
+              <button type="button" id="cal-next" class="cal-nav-btn">›</button>
+            </div>
+            <div class="calendar-grid-header">
+              <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+            </div>
+            <div id="calendar-days-grid" class="calendar-days-grid">
+              <!-- 動態生成日期按鈕 -->
+            </div>
+          </div>
+
+          <!-- 快速登記打卡抽屜 -->
+          <div id="day-editor-drawer" class="day-editor-drawer glassmorphism hidden">
+            <div class="drawer-header">
+              <span id="drawer-date-title">設定 2026/03/15 出勤狀態</span>
+              <button type="button" id="btn-close-drawer" class="btn-icon">✕</button>
+            </div>
+            <div class="drawer-body">
+              <div class="input-field">
+                <label>出勤性質</label>
+                <div class="daytype-selector">
+                  <button type="button" class="type-pill active" data-type="weekday">正常工作日</button>
+                  <button type="button" class="type-pill" data-type="rest_day">休息日</button>
+                  <button type="button" class="type-pill" data-type="regular_leave">例假日</button>
+                  <button type="button" class="type-pill" data-type="national_holiday">國定假日</button>
+                </div>
+              </div>
+              <div class="input-grid">
+                <div class="input-field">
+                  <label>正常工時 (小時)</label>
+                  <input type="number" id="drawer-normal-hours" value="8" min="0" max="10">
+                </div>
+                <div class="input-field">
+                  <label>加班時數 (小時)</label>
+                  <input type="number" id="drawer-overtime-hours" value="0" min="0" max="6">
+                </div>
+              </div>
+              <button type="button" id="btn-save-day" class="btn btn-secondary btn-block">儲存此日登記</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 全月加班時數與實發比對 -->
+        <div class="form-group-card glassmorphism">
+          <label class="section-label">公司實際發放之加班費</label>
+          <div class="input-field">
+            <label for="input-actual-overtime-paid">薪資單實發加班費金額 (元)</label>
+            <input type="number" id="input-actual-overtime-paid" placeholder="若未發放請填 0" value="0">
+            <span class="sub-hint">系統將為您試算「法定應得金額 vs 實發金額」差額</span>
+          </div>
+        </div>
+
+        <div class="action-btn-area">
+          <button type="button" id="btn-start-diagnosis" class="btn btn-primary btn-glow btn-block">
+            ⚡ 開始全面勞基法診斷分析
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= 視圖 3：AI 勞基法智囊對話 ================= -->
+      <section id="view-ai" class="tab-view">
+        <div class="view-intro">
+          <div class="pill-tag">模組三：政府解釋令 AI 智囊</div>
+          <h2>Qwen 3.8-27B 勞法顧問</h2>
+          <p>內建 Thinking 深度思考模式，引經據典引用真實「勞動部令函發文字號」。</p>
+        </div>
+
+        <!-- 熱門爭點快捷按鈕 -->
+        <div class="quick-tags-scroll">
+          <button type="button" class="quick-tag" data-q="老闆下班一直用 LINE 傳訊息交待工作，這樣算加班嗎？">#下班傳LINE算加班嗎</button>
+          <button type="button" class="quick-tag" data-q="公司每個月全勤獎金三千元，算平日加班費時被主管扣掉，合法嗎？">#全勤獎金算不算加班費母數</button>
+          <button type="button" class="quick-tag" data-q="請生理假主管要求出示醫療證明，還說要倒扣全勤獎金，合法嗎？">#生理假扣全勤違法嗎</button>
+          <button type="button" class="quick-tag" data-q="老闆說特休沒休完公司一律自動歸零或換補休，不能換錢？">#特休沒休完強制歸零</button>
+        </div>
+
+        <!-- 對話視窗容器 -->
+        <div class="chat-container glassmorphism">
+          <div id="chat-messages" class="chat-messages">
+            <!-- 預設歡迎氣泡 -->
+            <div class="chat-bubble ai-bubble">
+              <div class="bubble-header">
+                <span class="bot-badge">Qwen 3.8-27B 法律智囊</span>
+                <span class="bot-status">現行有效函釋庫</span>
+              </div>
+              <div class="bubble-content">
+                您好！我是您的勞基法專屬顧問。如果您遇到任何排班、扣薪、責任制或調職的爭議，隨時用白話告訴我，我會為您檢索台灣勞動部最新官方函釋字號為您撐腰！
+              </div>
+            </div>
+          </div>
+
+          <!-- 輸入區域 -->
+          <div class="chat-input-area">
+            <input type="text" id="chat-input-field" placeholder="請白話描述您遇到的爭議情境..." autocomplete="off">
+            <button type="button" id="btn-send-chat" class="btn-send">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 視圖 4：體檢總評與存證報告 ================= -->
+      <section id="view-report" class="tab-view">
+        <div class="view-intro">
+          <div class="pill-tag">模組四：權益看板與存證報告</div>
+          <h2>勞基法合規體檢報告</h2>
+          <p>已為您完成工資母數、高薪低報、勞退內扣與加班費之交叉核算。</p>
+        </div>
+
+        <!-- 風險儀表板與大看板 -->
+        <div class="dashboard-banner glassmorphism">
+          <div class="risk-badge-row">
+            <span id="report-risk-badge" class="risk-pill critical">🚨 發現重大違規</span>
+            <span id="report-date-badge" class="date-pill">體檢日期：2026/03/15</span>
+          </div>
+          <div class="claim-amount-box">
+            <span class="claim-lbl">預估雇主積欠與應返還總額</span>
+            <div class="claim-val-row">
+              <span class="currency">NT$</span>
+              <span id="report-total-claim" class="amount-number">0</span>
+              <span class="unit">元</span>
+            </div>
+          </div>
+          <div class="mini-stats-grid">
+            <div class="mini-stat-card">
+              <span class="s-lbl">違法項目</span>
+              <span id="stat-violations-count" class="s-val text-red">0 項</span>
+            </div>
+            <div class="mini-stat-card">
+              <span class="s-lbl">法定每小時工資</span>
+              <span id="stat-hourly-rate" class="s-val">$ 0</span>
+            </div>
+            <div class="mini-stat-card">
+              <span class="s-lbl">勞退6%提繳級距</span>
+              <span id="stat-pension-tier" class="s-val">$ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 特休與資遣費權益看板 -->
+        <div class="form-group-card glassmorphism leave-severance-card" style="margin-top: 18px;">
+          <div class="card-header-row">
+            <label class="section-label">📜 法定特休年資與資遣補償推算</label>
+            <span id="report-tenure-badge" class="badge-tip">年資：3.0 年</span>
+          </div>
+          <div class="leave-severance-grid">
+            <div class="benefit-box">
+              <span class="b-lbl">法定特別休假</span>
+              <span id="report-leave-days" class="b-val text-glow">14 天</span>
+              <span id="report-leave-cashout" class="b-sub">折算未休代金：$ 16,800 元</span>
+            </div>
+            <div class="benefit-box">
+              <span class="b-lbl">法定新制資遣費預估</span>
+              <span id="report-severance-pay" class="b-val text-glow">$ 54,000 元</span>
+              <span class="b-sub">勞工退休金條例第 12 條 (0.5月/年)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 違規清冊展開清單 -->
+        <div class="violations-list-section">
+          <h3 class="sub-heading">違規事實與請求清冊 (調解申請書附件)</h3>
+          <div id="violations-container" class="violations-container">
+            <!-- 動態注入違規卡片 -->
+          </div>
+        </div>
+
+        <!-- 獎勵廣告解鎖下載區域 -->
+        <div class="download-card glassmorphism">
+          <div class="dl-header">
+            <div class="dl-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <div>
+              <h4 class="dl-title">下載正式勞資爭議存證計算清冊 (PDF / 文字檔)</h4>
+              <p class="dl-desc">格式符合勞工局調解會規範，內含法條、算式核數表與真實令函依據。</p>
+            </div>
+          </div>
+          <div class="dl-action">
+            <button type="button" id="btn-download-pdf-reward" class="btn btn-reward btn-block">
+              <span class="btn-badge">贊助廣告</span>
+              <span>觀看 3 秒贊助短片，免費解鎖調解存證清冊</span>
+            </button>
+            <div id="unlocked-actions" class="unlocked-actions hidden" style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" id="btn-print-report" class="btn btn-primary btn-block">
+                🖨️ 呼叫列印 / 另存為調解存證 PDF
+              </button>
+              <button type="button" id="btn-export-txt" class="btn btn-secondary btn-block">
+                📥 下載正式調解申請請求清冊 (.txt)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 法律免責聲明 -->
+        <div class="legal-disclaimer-box">
+          ⚖️ <strong>重要法律聲明</strong>：本系統為勞動法令試算與勞動部行政解釋令之檢索輔助工具，內容依據使用者自行輸入之數據產出，僅供勞資爭議預備諮詢與事實釐清之參考，非屬《律師法》所定之正式法律意見書。
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= 廣告與導航保留區 ================= -->
+    <!-- Google Policy 安全間距隔離板 (48px) -->
+    <div class="ad-safety-divider">
+      <span class="ad-label">贊助商廣告 AD</span>
+    </div>
+
+    <!-- 底部常駐橫幅廣告欄位 (Banner Ad Slot) -->
+    <div id="banner-ad-container" class="banner-ad-slot">
+      <div class="mock-banner-content">
+        <span class="mock-sponsor">法律事務所 / 工會公益贊助推薦</span>
+        <span class="mock-title">遭遇不當解僱或職災？提供免費勞工法扶諮詢媒合</span>
+      </div>
+    </div>
+
+    <!-- 底部原生 Tab 導航列 -->
+    <nav class="bottom-nav glassmorphism">
+      <button type="button" class="nav-item active" data-tab="view-salary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        <span>薪資體檢</span>
+      </button>
+      <button type="button" class="nav-item" data-tab="view-schedule">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>排班月曆</span>
+      </button>
+      <button type="button" class="nav-item" data-tab="view-ai">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>AI 智囊</span>
+      </button>
+      <button type="button" class="nav-item" data-tab="view-report">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        <span>存證報告</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- 載入計算引擎與核心邏輯 -->
+  <script src="../engine/calculator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
